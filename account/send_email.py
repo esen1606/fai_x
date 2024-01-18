@@ -50,7 +50,7 @@ def send_confirmation_password(email, code):
     send_mail(
         subject,
         plain_message,
-        'admin@gmail.com',
+        'esenkackynbaev6@gmail.com',
         [email],
         html_message=html_message,
         fail_silently=True
