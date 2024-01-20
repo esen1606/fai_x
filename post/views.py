@@ -3,13 +3,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
-from .models import Post, Video
+from .models import Post
 from .serializers import PostListSerializer, PostCreateSerializer, PostDetailSerializer, VideoSerializer
 from .permissions import IsAuthorOrAdmin, IsAuthor
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
-
-
 
 class StandartPagination(PageNumberPagination):
     page_size = 1
@@ -75,10 +73,13 @@ class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
         return PostDetailSerializer
 
 class VideoCreateView(generics.CreateAPIView):
-    queryset = Video.objects.all()
+    queryset = Post.objects.all()
     serializer_class = VideoSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(username=self.request.user)
+
+class VideoDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = VideoSerializer
+
 
 

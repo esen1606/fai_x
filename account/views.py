@@ -72,10 +72,10 @@ class LogoutView(APIView):
 
 # class LoginView(View):
 #     template_name = 'account/login.html'
-#
+
 #     def get(self, request):
 #         return render(request, self.template_name)
-#
+
 #     def post(self, request):
 #         email = request.POST.get('email')
 #         password = request.POST.get('password')
@@ -90,7 +90,7 @@ class LogoutView(APIView):
 #                 return HttpResponseRedirect(reverse('dashboard') + f'?token={token_response.data["access"]}')
 #         else:
 #             return render(request, self.template_name, {'error': 'Invalid data'})
-#
+
 #         return render(request, self.template_name)
 
 
@@ -133,7 +133,7 @@ class DashboardView(View):
 #             return render(request, self.template_name, {'errors': serializer.errors})
 
 def activation_view(request):
-    return render(request, 'account/activation.html')
+    return render(request, 'account/activate.html')
 
 
 class RegistrationPhoneView(APIView):
@@ -145,6 +145,8 @@ class RegistrationPhoneView(APIView):
             return Response('Успешно зарегистрирован', status=201)
 
 class ResetPasswordView(APIView):
+
+    template_name = 'password_reset_email.html'
     def get(self, request):
         return Response({'message': 'Please provide an email to reset the password'})
 
@@ -154,7 +156,7 @@ class ResetPasswordView(APIView):
             email = serializer.validated_data['email']
             try:
                 user = User.objects.get(email=email)
-                # user.create_phone_number_code()
+                user.create_phone_number_code()
                 user.save()
                 send_confirmation_password(user.email, user.activation_code)
                 return Response({'activation_code': user.activation_code}, status=200)

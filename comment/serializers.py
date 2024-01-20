@@ -13,8 +13,8 @@ class CommentSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['post_title'] = instance.post.title
-        if instance.post.preview:
-            preview = instance.post.preview
+        if instance.post.images:
+            preview = instance.post.images
             representation['post_preview'] = preview.url
         else:
             representation['post_preview'] = None

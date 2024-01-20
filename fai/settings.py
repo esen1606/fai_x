@@ -27,8 +27,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
 
+ALLOWED_HOSTS =  ['127.0.0.1','77-235-30-51.ngrok-free.app']
 
 # Application definition
 
@@ -48,11 +48,13 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
 
+
     'account',
     'post',
     'category',
     'comment',
     'like',
+    
 ]
 
 MIDDLEWARE = [
@@ -150,11 +152,17 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCES_TOKEN_LIFETINE': timedelta(minutes=10),
+    'ACCES_TOKEN_LIFETINE': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETINE': timedelta(hours=24),
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
+CSRF_TRUSTED_ORIGINS = ['https://ddfd-77-235-30-51.ngrok-free.app']
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = '6379'
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -166,6 +174,12 @@ SWAGGER_SETTINGS = {
     },
 }
 
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+# CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

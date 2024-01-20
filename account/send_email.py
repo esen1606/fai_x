@@ -9,20 +9,11 @@ auth_token = settings.TWILIO_AUTH_TOKEN
 twilio_sender = settings.TWILIO_SENDER_PHONE
 
 
-# def send_confirmation_email(email, code):
-#     send_mail(
-#         'Здравствуйте активируйте ваш аккаунт!',
-#         f'Чтобы ваш аккаунт скопируйте и введите на сайте код: {code}',
-#         'esenkackynbaev6@gmail.com',
-#         [email],
-#         fail_silently=False,
-#     )
-
 def send_confirmation_email(email , code):
-    activation_url = f'http://127.0.0.1:8000/api/account/activate/?u={code}'
+    activation_url = f'http://127.0.0.1:8000/fai/account/activate/?u={code}'
     context = {'activation_url': activation_url}
     subject = 'Здраствуйте потвердите свое присудствие '
-    html_message = render_to_string('activate.html',context)
+    html_message = render_to_string('account/activate.html',context)
     plain_message = strip_tags(html_message)
     
     
