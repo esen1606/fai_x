@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framewk import serializers
 from .models import Like
 
 

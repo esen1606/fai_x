@@ -125,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bishkek'
 
 USE_I18N = True
 
@@ -136,6 +136,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -178,5 +183,79 @@ TWILIO_SID = 'AC272f2d62ac5c648ddfdae66e38df7617'
 TWILIO_AUTH_TOKEN = '50b5187f037ed09b960ba0951d3942ac'
 TWILIO_SENDER_PHONE = '+17178976115'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+# # celery setting.
+# CELERY_CACHE_BACKEND = 'default'
+
+
+
+# # django setting.
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#         'LOCATION': 'redis://127.0.0.1:6379',
+#         'OPTIONS':{
+#             'CLIENT_CLASS':'django_redis.client.DefaultClient',
+#         }
+#     }
+# }
+
+
+# REDIS_HOST = '127.0.0.1'
+# REDIS_PORT = '6379'
+
+#Celery setting
+# CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+# CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+# # CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+
+
+
+# #Celery result
+# CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_CACHE_BACKEND = 'django-cache'
+# CELERY_CACHE_BACKEND_OPTIONS = {
+#     'max_entries': 1000,
+#     'cull_frequency': 3,
+# }
+
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+
+#     "formatters": {
+#         "main_format": {
+#             "format": "[{asctime}-{levelname}] {module}-{filename}: {message}",
+#             "style": "{",
+#         }
+#     },
+
+#     'handlers': {
+#         'console': {'class': 'logging.StreamHandler',
+#                     'formatter': 'main_format'},
+#         'file': {
+#             'class': 'logging.FileHandler',
+#             'formatter': 'main_format',
+#             'filename': '/home/yimanbek/Desktop/folder/Book_store/log.log',
+#         }
+#     },
+
+#     'loggers': {
+#         'django.db.backends': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG'
+#         },
+#         'product': {
+#             'handlers': ['file'],
+#             'level': 'WARNING'
+#         }
+#     }
+# }
+
+
+# DRF_API_LOGGER_DATABASE = True
